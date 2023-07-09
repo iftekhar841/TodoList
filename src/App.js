@@ -13,79 +13,96 @@ import {
 
 function App() {
   let initTodo;
-  if(localStorage.getItem("todos")=== null) {
-   initTodo = [];
-  } 
+  if (localStorage.getItem("todos") === null) {
+    initTodo = [];
+  }
   else {
-    initTodo = JSON.parse(localStorage.getItem("todos")); 
+    initTodo = JSON.parse(localStorage.getItem("todos"));
   }
 
 
   const onDelete = (todo) => {
     console.log("I am on delete of todo ", todo);
 
-    setTodos(todos.filter((e)=>{
-      return  e!==todo;
+    setTodos(todos.filter((e) => {
+      return e !== todo;
     }));
 
     localStorage.setItem("todos", JSON.stringify(todos));
   }
 
-  const addTodo = (title,desc) => {
-    console.log("i am adding todo title and desc", title,desc);
-   let sno; 
-   if(todos.length === 0) {
-     sno = 0;
-  } else {
-    sno  = todos[todos.length-1].sno + 1 ;
-  } 
-    const myTodo = {
-      sno   : sno,
-      title : title,
-      desc  : desc, 
+  const addTodo = (title, desc) => {
+    console.log("i am adding todo title and desc", title, desc);
+    let sno;
+    if (todos.length === 0) {
+      sno = 0;
+    } else {
+      sno = todos[todos.length - 1].sno + 1;
     }
-    setTodos([...todos,myTodo]);
-    console.log('my todo -->',myTodo);
+    const myTodo = {
+      sno: sno,
+      title: title,
+      desc: desc
+    }
+    setTodos([...todos, myTodo]);
+    console.log('my todo -->', myTodo);
 
-    
+
   }
 
-  const [todos , setTodos] = useState(initTodo);
-   useEffect(() => {
+  const [todos, setTodos] = useState(initTodo);
+  useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
-   }, [todos])
-   
+  }, [todos])
+
   return (
     <>
-    <Router>
-      <Header title = {"My Todo List"} searchBar = {false}/>
-      <Routes>
-           {/* <Route path="/" render = {()=>{
-            return (
-            <>
-              <AddTodo addTodo={addTodo}/>
-              <Todos todos = {todos} onDelete = {onDelete}/>
-            </>)
-          }}/> */}
+      <Router>
+        <Header title={"My Todo List"} searchBar={false} />
+        <Routes>
+          <Route path="/"
+            element={
 
-          <Route path="/" 
-          element = {
-              
-          <>
-            <AddTodo addTodo={addTodo}/>
-            <Todos todos = {todos} onDelete = {onDelete}/>
-          </>
-            
-        }/>
+              <>
+                <AddTodo addTodo={addTodo} />
+                <Todos todos={todos} onDelete={onDelete} />
+                <button type="button" class="btn btn-success">Remove All</button>
+              </>
+
+            } />
 
           {/* <Route path="/" element = {<Todos todos = {todos} onDelete = {onDelete}/>}></Route>  */}
-          <Route exact path="/about" element = {<About/>}> 
-          </Route>  
+          <Route exact path="/about" element={<About />}>
+          </Route>
         </Routes>
-      <Footer/>
-    </Router>  
+        <Footer />
+      </Router>
     </>
   );
 }
-
 export default App;
+// -------------------------------------------------------***************.............+++--------------
+
+
+// import React from 'react'
+// // import ComA from './ContextApi/ComA'
+// import TodoList from './TodoList';
+
+// // const FirstName = createContext(); 
+// // const LastName = createContext();
+
+// const App = () => {
+//     return ( 
+//         <div className='app'>
+//             <TodoList />
+//         </div>
+//         // <FirstName.Provider value = {"Context"}>
+//         //     <LastName.Provider value= {"Api"}>
+//         //         < ComA />
+//         //     </LastName.Provider>
+//         // </FirstName.Provider>
+//    )
+// }
+
+// export default App;
+// // export { FirstName, LastName };

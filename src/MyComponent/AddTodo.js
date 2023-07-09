@@ -16,6 +16,7 @@ export const AddTodo = ({ addTodo }) => {
         } 
     }
     return (
+        <>
         <div className="container my-3">
             <h3>Add a Todo</h3>
             <form onSubmit={submit}>
@@ -33,5 +34,6 @@ export const AddTodo = ({ addTodo }) => {
                 <button type="submit" className="btn btn-sm btn-success">Add Todo</button>
             </form>
         </div>
+    </>
     )
 }
